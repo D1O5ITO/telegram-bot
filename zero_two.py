@@ -1,6 +1,8 @@
 from telegram.ext import Updater, MessageHandler, Filters
 
-TOKEN = '8060416325:AAEpvsop8NOY3e4t-UVcTNoE9Dixqh41Orc'
+import os
+TOKEN = os.getenv("TOKEN")
+
 
 def bienvenida(update, context):
     for miembro in update.message.new_chat_members:
