@@ -1,0 +1,25 @@
+from telegram.ext import Updater, MessageHandler, Filters
+
+TOKEN = '8060416325:AAEpvsop8NOY3e4t-UVcTNoE9Dixqh41Orc'
+
+def bienvenida(update, context):
+    for miembro in update.message.new_chat_members:
+        # Envía una imagen desde tu PC
+        context.bot.send_photo(
+            chat_id=update.effective_chat.id,
+            photo=open('img.jpg', 'rb'),  # Cambiá por el nombre de tu imagen
+            caption=f"¡Bienvenido {miembro.first_name}!\nA nuestra comunidad 🎉\nRevisa las reglas del grupo."
+        )
+
+def main():
+    updater = Updater(TOKEN, use_context=True)
+    dp = updater.dispatcher
+
+    dp.add_handler(MessageHandler(Filters.status_update.new_chat_members, bienvenida))
+
+    updater.start_polling()
+    print("Bot con bienvenida visual iniciado...")
+    updater.idle()
+
+if __name__ == '__main__':
+    main()
